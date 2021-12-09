@@ -11,6 +11,7 @@ import java.util.List;
 public class Employee {
     private long id;
     private String full_name;
+    private String phone;
     private Project project;
     private Date birthday;
     private Date start_work;

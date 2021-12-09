@@ -8,5 +8,6 @@ import lombok.Data;
 public class Present {
     private long id;
     private String name;
+    private String link;
     private String description;
 }
