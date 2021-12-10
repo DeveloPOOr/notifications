@@ -1,13 +1,14 @@
 package org.tinkoff.notifications.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.tinkoff.notifications.dto.NotificationDto;
 import org.tinkoff.notifications.model.Notification;
 
 
 @Mapper
 public interface NotificationDao {
 
-    void save(Notification project);
+    void save(NotificationDto notification);
 
     Notification findById(long id);
 

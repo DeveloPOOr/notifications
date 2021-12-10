@@ -4,20 +4,33 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="org.tinkoff.notifications.PresentDao">
+<mapper namespace="org.tinkoff.notifications.dao.PresentDao">
 
-<!--    <resultMap id="PresentMap" type="Present">-->
-<!--        <result property="id" column="id"/>-->
-<!--        <result property="name" column="name"/>-->
-<!--        <result property="link" column="link"/>-->
-<!--        <result property="description" column="description"/>-->
-<!--    </resultMap>-->
+    <insert id="save">
+        INSERT INTO present (name, link, description, employee_id)
+        VALUES (#{name}, #{link}, #{description}, #{employeeId})
+    </insert>
 
-<!--    <insert id="save">-->
-<!--        INSERT INTO present-->
-<!--        VALUES (#{name}, #{link}, #{description})-->
-<!--    </insert>-->
+    <select id="findById" resultType="Present">
+        SELECT (id, name, link, description)
+        FROM present
+        WHERE id = #{id}
+    </select>
 
+
+    <update id="update" parameterType="Present">
+        UPDATE present
+        SET name        = #{name},
+            link        = #{link},
+            description = #{description}
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="Present">
+        DELETE
+        FROM present
+        WHERE id = #{id}
+    </delete>
 
 
 </mapper>

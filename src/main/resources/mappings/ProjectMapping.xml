@@ -5,7 +5,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.tinkoff.notifications.dao.ProjectDao">
-    
+
     <insert id="save">
         INSERT INTO project (name, description)
         VALUES (#{name}, #{description})

@@ -4,10 +4,54 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="NotificationDao">
+<mapper namespace="org.tinkoff.notifications.dao.NotificationDao">
 
+    <resultMap id="NotificationMap" type="Notification">
+        <id property="id" column="n_id"/>
+        <result property="type" column="n_type"/>
+        <association property="employee" resultMap="org.tinkoff.notifications.dao.EmployeeDao.EmployeeMap">
+        </association>
+    </resultMap>
 
+    <insert id="save">
+        INSERT INTO notification (type, employee_id)
+        VALUES (#{type}, #{employee.id})
+    </insert>
 
+    <select id="findById" resultMap="NotificationMap">
+        SELECT n.id                AS n_id,
+               n.type              AS n_type,
+               employee.id         AS e_id,
+               employee.birthday   AS e_birthday,
+               employee.phone      AS e_phone,
+               employee.start_work AS e_start_work,
+               employee.full_name  AS e_full_name,
+               employee.city       AS e_city,
+               proj.id             AS proj_id,
+               proj.name           AS proj_name,
+               proj.description    AS proj_description,
+               pres.id             AS pres_id,
+               pres.name           AS pres_name,
+               pres.link           AS pres_link,
+               pres.description    AS pres_description
+        FROM notification n
+                 JOIN employee
+                      ON n.employee_id = employee.id
+                 JOIN project proj ON employee.project_id = proj.id
+                 JOIN present pres ON employee.id = pres.employee_id
+        WHERE n.id = #{id}
+    </select>
+
+    <update id="update" parameterType="Notification">
+        UPDATE notification (type)
+        SET type = #{type}
+    </update>
+
+    <delete id="delete" parameterType="Notification">
+        DELETE
+        FROM notification
+        WHERE id = #{id}
+    </delete>
 
 
 </mapper>

@@ -7,11 +7,11 @@ import org.tinkoff.notifications.model.Present;
 
 @Mapper
 public interface PresentDao {
-    void save(PresentDto present);
+    void save(PresentDto present, long employeeId);
 
     Present findById(long id);
 
-    void update(Present course);
+    void update(Present present);
 
-    void delete(Present course);
+    void delete(Present present);
 }

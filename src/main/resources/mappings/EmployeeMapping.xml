@@ -4,10 +4,69 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="EmployeeDao">
+<mapper namespace="org.tinkoff.notifications.dao.EmployeeDao">
 
+    <resultMap id="EmployeeMap" type="Employee">
+        <result property="id" column="e_id"/>
+        <result property="birthday" column="e_birthday"/>
+        <result property="phone" column="e_phone"/>
+        <result property="start_work" column="e_start_work"/>
+        <result property="full_name" column="e_full_name"/>
+        <result property="city" column="e_city"/>
+        <association property="project" javaType="Project">
+            <id property="id" column="proj_id"/>
+            <result property="name" column="proj_name"/>
+            <result property="description" column="proj_description"/>
+        </association>
+        <collection property="wishlist" ofType="Present" javaType="java.util.ArrayList">
+            <id property="id" column="pres_id"/>
+            <result property="name" column="pres_name"/>
+            <result property="link" column="pres_link"/>
+            <result property="description" column="pres_description"/>
+        </collection>
+    </resultMap>
+    <insert id="save">
+        INSERT INTO employee (birthday, phone, start_work, full_name, city)
+        VALUES (#{birthday}, #{phone}, #{start_work}, #{full_name}, #{city})
+    </insert>
 
+    <select id="findById" resultMap="EmployeeMap">
+        SELECT employee.id         AS e_id,
+               employee.birthday   AS e_birthday,
+               employee.phone      AS e_phone,
+               employee.start_work AS e_start_work,
+               employee.full_name  AS e_full_name,
+               employee.city       AS e_city,
+               proj.id             AS proj_id,
+               proj.name           AS proj_name,
+               proj.description    AS proj_description,
+               pres.id             AS pres_id,
+               pres.name           AS pres_name,
+               pres.link           AS pres_link,
+               pres.description    AS pres_description
+        FROM employee
+                 JOIN project proj ON employee.project_id = proj.id
+                 JOIN present pres ON employee.id = pres.employee_id
+        WHERE employee.id = #{id}
+    </select>
 
+    <update id="update" parameterType="Employee">
+        UPDATE employee
+        SET birthday   = #{birtday},
+            phone      = #{phone},
+            start_work = #{start_work},
+            full_name  = #{full_name},
+            city       = #{city}
+    </update>
+
+    <delete id="delete" parameterType="Employee">
+        DELETE
+        FROM employee
+        WHERE id = #{id};
+        DELETE
+        FROM present
+        WHERE employee_id = #{id};
+    </delete>
 
 
 </mapper>
