@@ -1,1 +1,0 @@
-ALTER TABLE employee ADD full_name VARCHAR(100);

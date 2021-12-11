@@ -8,11 +8,11 @@
 
     <insert id="save">
         INSERT INTO present (name, link, description, employee_id)
-        VALUES (#{name}, #{link}, #{description}, #{employeeId})
+        VALUES (#{present.name}, #{present.link}, #{present.description}, #{employeeId})
     </insert>
 
     <select id="findById" resultType="Present">
-        SELECT (id, name, link, description)
+        SELECT id, name, link, description
         FROM present
         WHERE id = #{id}
     </select>

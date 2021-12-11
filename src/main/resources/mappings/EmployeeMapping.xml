@@ -63,9 +63,6 @@
         DELETE
         FROM employee
         WHERE id = #{id};
-        DELETE
-        FROM present
-        WHERE employee_id = #{id};
     </delete>
 
 
