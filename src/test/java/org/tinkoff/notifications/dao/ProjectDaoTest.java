@@ -3,11 +3,13 @@ package org.tinkoff.notifications.dao;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 import org.tinkoff.notifications.dto.ProjectDto;
 import org.tinkoff.notifications.model.Project;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
+@ActiveProfiles("test")
 public class ProjectDaoTest {
 
     @Autowired
@@ -16,24 +18,30 @@ public class ProjectDaoTest {
     @Test
     public void saveProject() {
         projectDao.save(preparedProjectDto());
+        assertEquals(projectDao.findById(4L), preparedProject(4L));
     }
 
     @Test
     public void getProject() {
-        assertEquals(projectDao.findById(1L), preparedProject(1L));
+        assertEquals(projectDao.findById(1L), new Project(
+                1L,
+                "Тинькофф инвестиции",
+                "Про инвестиции"
+        ));
     }
 
     @Test
     public void updateProject() {
-        Project project = preparedProject(4L);
+        Project project = preparedProject(2L);
         project.setDescription("update");
         projectDao.update(project);
-        assertEquals(projectDao.findById(4L), project);
+        assertEquals(projectDao.findById(2L), project);
     }
 
     @Test
     public void deleteProject() {
-        projectDao.delete(preparedProject(4L));
+        projectDao.delete(preparedProject(3L));
+        assertEquals(projectDao.findById(3L), null);
     }
 
 

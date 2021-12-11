@@ -15,10 +15,10 @@ class PresentDaoTest {
     @Autowired
     private PresentDao presentDao;
 
-    @Test
-    public void savePresent() {
-        presentDao.save(preparedPresentDto());
-    }
+//    @Test
+//    public void savePresent() {
+//        presentDao.save(preparedPresentDto());
+//    }
 
     public PresentDto preparedPresentDto() {
         return new PresentDto(
