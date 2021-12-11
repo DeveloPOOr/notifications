@@ -43,7 +43,7 @@
     </select>
 
     <update id="update" parameterType="Notification">
-        UPDATE notification (type)
+        UPDATE notification
         SET type = #{type}
     </update>
 

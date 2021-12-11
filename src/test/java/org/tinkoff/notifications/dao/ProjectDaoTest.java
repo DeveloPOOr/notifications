@@ -6,6 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.tinkoff.notifications.dto.ProjectDto;
 import org.tinkoff.notifications.model.Project;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
