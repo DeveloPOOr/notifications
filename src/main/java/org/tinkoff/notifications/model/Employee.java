@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -14,7 +15,7 @@ public class Employee {
     private long id;
     private String full_name;
     private String phone;
-    private Project project;
+    private Set<Project> projects;
     private Date birthday;
     private Date start_work;
     private List<Present> wishlist;

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.tinkoff.notifications.dao.EmployeeProjectDao">
+
+
+    <insert id="addEmployee">
+        INSERT INTO employee_project_relationship (employee_id, project_id)
+        VALUES (#{employee}, #{project})
+    </insert>
+
+    <delete id="deleteEmployee">
+        DELETE
+        FROM employee_project_relationship
+        WHERE employee_id = #{employee}
+          AND project_id = #{project}
+    </delete>
+
+
+</mapper>

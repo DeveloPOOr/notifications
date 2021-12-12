@@ -13,11 +13,11 @@
         <result property="start_work" column="e_start_work"/>
         <result property="full_name" column="e_full_name"/>
         <result property="city" column="e_city"/>
-        <association property="project" javaType="Project">
+        <collection property="projects" ofType="Project" javaType="java.util.HashSet">
             <id property="id" column="proj_id"/>
             <result property="name" column="proj_name"/>
             <result property="description" column="proj_description"/>
-        </association>
+        </collection>
         <collection property="wishlist" ofType="Present" javaType="java.util.ArrayList">
             <id property="id" column="pres_id"/>
             <result property="name" column="pres_name"/>
@@ -45,7 +45,8 @@
                pres.link           AS pres_link,
                pres.description    AS pres_description
         FROM employee
-                 LEFT JOIN project proj ON employee.project_id = proj.id
+                 LEFT JOIN employee_project_relationship epr ON employee.id = epr.employee_id
+                 LEFT JOIN project proj ON epr.project_id = proj.id
                  LEFT JOIN present pres ON employee.id = pres.employee_id
         WHERE employee.id = #{id}
     </select>

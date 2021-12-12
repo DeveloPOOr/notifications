@@ -8,12 +8,18 @@ CREATE TABLE employee
 (
     id         SERIAL PRIMARY KEY,
     phone      TEXT,
-    full_name VARCHAR(100) NOT NULL,
-    birthday   DATE        NOT NULL,
-    start_work DATE        NOT NULL,
-    city       VARCHAR(50) NOT NULL,
-    project_id BIGINT,
-    FOREIGN KEY (project_id) REFERENCES project (id) ON DELETE SET NULL
+    full_name  VARCHAR(100) NOT NULL,
+    birthday   DATE         NOT NULL,
+    start_work DATE         NOT NULL,
+    city       VARCHAR(50)  NOT NULL
+);
+CREATE TABLE employee_project_relationship
+(
+    employee_id BIGINT,
+    project_id  BIGINT,
+    FOREIGN KEY (employee_id) REFERENCES employee (id) ON DELETE CASCADE,
+    FOREIGN KEY (project_id) REFERENCES project (id) ON DELETE CASCADE,
+    UNIQUE (employee_id, project_id)
 );
 CREATE TABLE present
 (

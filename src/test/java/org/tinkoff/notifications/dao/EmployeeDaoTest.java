@@ -13,6 +13,7 @@ import org.tinkoff.notifications.model.Project;
 import java.sql.Date;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -30,17 +31,15 @@ public class EmployeeDaoTest {
     public void save() {
         EmployeeDto employeeDto = new EmployeeDto("Зубенко Михаил Петрович",
                 "+79992434271",
-                null,
                 Date.valueOf("2008-10-25"),
                 Date.valueOf("2020-10-10"),
-                Collections.emptyList(),
                 "Милан"
         );
         Employee employee = new Employee(
                 5L,
                 "Зубенко Михаил Петрович",
                 "+79992434271",
-                null,
+                Collections.emptySet(),
                 Date.valueOf("2008-10-25"),
                 Date.valueOf("2020-10-10"),
                 Collections.emptyList(),
@@ -56,7 +55,7 @@ public class EmployeeDaoTest {
                 1L,
                 "Зубенко Михаил Петрович",
                 "+79992434271",
-                new Project(1L, "Тинькофф инвестиции", "Про инвестиции"),
+                Set.of(new Project(1L, "Тинькофф инвестиции", "Про инвестиции")),
                 Date.valueOf("2008-10-25"),
                 Date.valueOf("2020-10-10"),
                 List.of(
