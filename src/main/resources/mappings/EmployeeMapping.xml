@@ -45,18 +45,19 @@
                pres.link           AS pres_link,
                pres.description    AS pres_description
         FROM employee
-                 JOIN project proj ON employee.project_id = proj.id
-                 JOIN present pres ON employee.id = pres.employee_id
+                 LEFT JOIN project proj ON employee.project_id = proj.id
+                 LEFT JOIN present pres ON employee.id = pres.employee_id
         WHERE employee.id = #{id}
     </select>
 
     <update id="update" parameterType="Employee">
         UPDATE employee
-        SET birthday   = #{birtday},
+        SET birthday   = #{birthday},
             phone      = #{phone},
             start_work = #{start_work},
             full_name  = #{full_name},
             city       = #{city}
+        WHERE id = #{id};
     </update>
 
     <delete id="delete" parameterType="Employee">

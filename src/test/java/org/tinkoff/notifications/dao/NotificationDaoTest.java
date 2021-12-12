@@ -7,10 +7,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.tinkoff.notifications.dto.NotificationDto;
 import org.tinkoff.notifications.model.Employee;
 import org.tinkoff.notifications.model.Notification;
-import org.tinkoff.notifications.model.Present;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 @SpringBootTest
 @ActiveProfiles("test")
