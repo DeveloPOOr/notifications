@@ -31,8 +31,8 @@ public class EmployeeDaoTest {
     public void save() {
         EmployeeDto employeeDto = new EmployeeDto("Зубенко Михаил Петрович",
                 "+79992434271",
-                Date.valueOf("2008-10-25"),
-                Date.valueOf("2020-10-10"),
+                "2008-10-25",
+                "2020-10-10",
                 "Милан"
         );
         Employee employee = new Employee(
@@ -40,8 +40,8 @@ public class EmployeeDaoTest {
                 "Зубенко Михаил Петрович",
                 "+79992434271",
                 Collections.emptySet(),
-                Date.valueOf("2008-10-25"),
-                Date.valueOf("2020-10-10"),
+                "2008-10-25",
+                "2020-10-10",
                 Collections.emptyList(),
                 "Милан"
         );
@@ -56,8 +56,8 @@ public class EmployeeDaoTest {
                 "Зубенко Михаил Петрович",
                 "+79992434271",
                 Set.of(new Project(1L, "Тинькофф инвестиции", "Про инвестиции")),
-                Date.valueOf("2008-10-25"),
-                Date.valueOf("2020-10-10"),
+                "2008-10-25",
+                "2020-10-10",
                 List.of(
                         new Present(1L, "Подарок1", "ссылка1", "описание1"),
                         new Present(2L, "Подарок2", "ссылка2", "описание2"),

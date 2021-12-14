@@ -27,7 +27,7 @@
     </resultMap>
     <insert id="save">
         INSERT INTO employee (birthday, phone, start_work, full_name, city)
-        VALUES (#{birthday}, #{phone}, #{start_work}, #{full_name}, #{city})
+        VALUES (TO_DATE(#{birthday}, 'YYYY-MM-DD'), #{phone}, TO_DATE(#{start_work}, 'YYYY-MM-DD'), #{full_name}, #{city})
     </insert>
 
     <select id="findById" resultMap="EmployeeMap">

@@ -5,6 +5,8 @@ import org.tinkoff.notifications.dto.EmployeeDto;
 import org.tinkoff.notifications.model.Employee;
 import org.tinkoff.notifications.service.EmployeeService;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/employee")
 public class EmployeeController {
@@ -16,7 +18,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public void saveEmployee(@RequestBody EmployeeDto employeeDto) {
+    public void saveEmployee(@RequestBody @Valid EmployeeDto employeeDto) {
         employeeService.save(employeeDto);
     }
 
@@ -27,12 +29,12 @@ public class EmployeeController {
     }
 
     @PatchMapping("/update")
-    public void updateEmployee(@RequestBody Employee employee) {
+    public void updateEmployee(@RequestBody @Valid Employee employee) {
         employeeService.update(employee);
     }
 
     @DeleteMapping("/delete")
-    public void deleteEmployee(@RequestBody Employee employee) {
+    public void deleteEmployee(@RequestBody @Valid Employee employee) {
         employeeService.delete(employee);
     }
 }

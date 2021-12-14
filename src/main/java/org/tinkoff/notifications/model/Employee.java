@@ -16,8 +16,8 @@ public class Employee {
     private String full_name;
     private String phone;
     private Set<Project> projects;
-    private Date birthday;
-    private Date start_work;
+    private String birthday;
+    private String start_work;
     private List<Present> wishlist;
     private String city;
 }
