@@ -2,10 +2,14 @@ package org.tinkoff.notifications.service;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.tinkoff.notifications.dao.NotificationDao;
 import org.tinkoff.notifications.dto.NotificationDto;
 import org.tinkoff.notifications.model.Notification;
+
+import java.sql.Date;
+import java.util.Calendar;
 
 @Service
 public class NotificationService {
@@ -36,6 +40,19 @@ public class NotificationService {
     public void delete(Notification notification) {
         notificationDao.delete(notification);
         logger.info("Notification " + notification + " was deleted");
+    }
+
+    @Scheduled(fixedDelayString = "${notifications.delay}")
+    public void createNotifications() {
+        java.sql.Date startPeriod = new java.sql.Date(new java.util.Date().getTime());
+        Calendar c = Calendar.getInstance();
+        c.setTime(startPeriod);
+        c.add(Calendar.DATE, 7);
+        java.sql.Date endPeriod = new java.sql.Date(c.getTimeInMillis());
+//        java.sql.Date startPeriod = Date.valueOf("1999-12-20");
+//        java.sql.Date endPeriod = new java.sql.Date(new java.util.Date().getTime());
+        notificationDao.createBirthdays(startPeriod, endPeriod);
+        notificationDao.createAnniversaries(startPeriod, endPeriod);
     }
 
 }

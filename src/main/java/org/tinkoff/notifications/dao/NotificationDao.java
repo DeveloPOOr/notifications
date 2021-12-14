@@ -4,6 +4,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.tinkoff.notifications.dto.NotificationDto;
 import org.tinkoff.notifications.model.Notification;
 
+import java.sql.Date;
+
 
 @Mapper
 public interface NotificationDao {
@@ -15,4 +17,8 @@ public interface NotificationDao {
     void update(Notification course);
 
     void delete(Notification course);
+
+    void createBirthdays(Date startPeriod, Date endPeriod);
+
+    void createAnniversaries(Date startPeriod, Date endPeriod);
 }

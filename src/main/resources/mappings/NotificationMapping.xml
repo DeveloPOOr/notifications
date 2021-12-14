@@ -18,6 +18,29 @@
         VALUES (#{type}, #{employee.id})
     </insert>
 
+    <insert id="createBirthdays">
+        <![CDATA[
+        INSERT INTO notification (type, employee_id)
+        SELECT 'BIRTHDAY', id
+        FROM employee e
+        WHERE (e.birthday >= #{startPeriod})
+          AND (e.birthday <= #{endPeriod})
+        ON CONFLICT DO NOTHING
+        ]]>;
+
+    </insert>
+    <insert id="createAnniversaries">
+        <![CDATA[
+        INSERT INTO notification (type, employee_id)
+        SELECT 'ANNIVERSARY', id
+        FROM employee e
+        WHERE (e.birthday >= #{startPeriod})
+          AND (e.birthday <= #{endPeriod})
+        ON CONFLICT DO NOTHING
+        ]]>;
+
+    </insert>
+
     <select id="findById" resultMap="NotificationMap">
         SELECT n.id                AS n_id,
                n.type              AS n_type,
