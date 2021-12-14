@@ -5,8 +5,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.tinkoff.notifications.dto.EmployeeDto;
 import org.tinkoff.notifications.model.Employee;
 
-import java.util.List;
-
 @Mapper
 public interface EmployeeDao {
 

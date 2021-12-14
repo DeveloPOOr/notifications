@@ -10,8 +10,8 @@ import org.tinkoff.notifications.model.Present;
 @Service
 public class PresentService {
 
-    private PresentDao presentDao;
-    private Logger logger = LoggerFactory.getLogger(PresentService.class);
+    private final PresentDao presentDao;
+    private final Logger logger = LoggerFactory.getLogger(PresentService.class);
 
     public PresentService(PresentDao presentDao) {
         this.presentDao = presentDao;

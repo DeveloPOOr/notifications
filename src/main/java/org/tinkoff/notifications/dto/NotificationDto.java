@@ -1,6 +1,7 @@
 package org.tinkoff.notifications.dto;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.tinkoff.notifications.model.Employee;
 
 import javax.validation.constraints.NotNull;

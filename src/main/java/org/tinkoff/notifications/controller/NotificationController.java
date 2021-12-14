@@ -29,9 +29,9 @@ public class NotificationController {
     }
 
     @GetMapping("/get")
-    public Notification findById(@RequestParam("notification_id")long notification_id) {
+    public Notification findById(@RequestParam("notification_id") long notification_id) {
         Notification notification = notificationService.findById(notification_id);
-        if(notification == null) {
+        if (notification == null) {
             throw NO_NOTIFICATION.exception(String.format("with id %d", notification_id));
         }
         return notification;
@@ -40,7 +40,7 @@ public class NotificationController {
     @PatchMapping("/update")
     public void updateNotification(@RequestBody Notification notification) {
         Notification notificationCheck = notificationService.findById(notification.getId());
-        if(notificationCheck == null) {
+        if (notificationCheck == null) {
             throw NO_NOTIFICATION.exception(String.format("with id %d", notification.getId()));
         }
         notificationService.update(notification);
@@ -49,7 +49,7 @@ public class NotificationController {
     @DeleteMapping("/delete")
     public void deleteNotification(@RequestBody Notification notification) {
         Notification notificationCheck = notificationService.findById(notification.getId());
-        if(notificationCheck == null) {
+        if (notificationCheck == null) {
             throw NO_NOTIFICATION.exception(String.format("with id %d", notification.getId()));
         }
         notificationService.delete(notification);

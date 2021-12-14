@@ -7,7 +7,6 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.sql.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -38,6 +37,6 @@ public class Employee {
     private List<Present> wishlist;
 
     @Length(min = 3, max = 20, message = "Длина города должна быть от 3 до 20 символов")
-    @NotNull(message = "Длина города должна быть от 3 до 20 символов" )
+    @NotNull(message = "Длина города должна быть от 3 до 20 символов")
     private String city;
 }

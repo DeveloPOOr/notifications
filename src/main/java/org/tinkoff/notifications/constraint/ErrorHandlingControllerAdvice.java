@@ -27,7 +27,7 @@ class ErrorHandlingControllerAdvice {
     }
 
     @ExceptionHandler(ApplicationError.ApplicationException.class)
-    public ResponseEntity<ApplicationError.ApplicationException.ApplicationExceptionCompanion> handleException(ApplicationError.ApplicationException e){
+    public ResponseEntity<ApplicationError.ApplicationException.ApplicationExceptionCompanion> handleException(ApplicationError.ApplicationException e) {
         return ResponseEntity.status(e.companion.code()).body(e.companion);
     }
 }

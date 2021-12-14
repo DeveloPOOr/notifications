@@ -25,7 +25,7 @@ public enum ApplicationError {
 
         ApplicationException(ApplicationError error, String message) {
             super(error.message + " : " + message);
-            this.companion = new ApplicationExceptionCompanion(error.code, error.message +" "+ message);
+            this.companion = new ApplicationExceptionCompanion(error.code, error.message + " " + message);
         }
 
         public record ApplicationExceptionCompanion(int code, String message) {

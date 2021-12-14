@@ -23,9 +23,9 @@ public class PresentController {
     }
 
     @GetMapping("/get")
-    public Present findById(@RequestParam("present_id")long present_id) {
+    public Present findById(@RequestParam("present_id") long present_id) {
         Present present = presentService.findById(present_id);
-        if(present == null) {
+        if (present == null) {
             throw NO_PRESENT.exception(String.format("with id %d", present_id));
         }
         return present;
@@ -34,7 +34,7 @@ public class PresentController {
     @PatchMapping("/update")
     public void updatePresent(@RequestBody Present present) {
         Present presentCheck = presentService.findById(present.getId());
-        if(presentCheck == null) {
+        if (presentCheck == null) {
             throw NO_PRESENT.exception(String.format("with id %d", present.getId()));
         }
         presentService.update(present);
@@ -43,7 +43,7 @@ public class PresentController {
     @DeleteMapping("/delete")
     public void deletePresent(@RequestBody Present present) {
         Present presentCheck = presentService.findById(present.getId());
-        if(presentCheck == null) {
+        if (presentCheck == null) {
             throw NO_PRESENT.exception(String.format("with id %d", present.getId()));
         }
         presentService.delete(present);

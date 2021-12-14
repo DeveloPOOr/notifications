@@ -30,6 +30,6 @@ public class EmployeeDto {
     private String start_work;
 
     @Length(min = 3, max = 20, message = "Длина города должна быть от 3 до 20 символов")
-    @NotNull(message = "Длина города должна быть от 3 до 20 символов" )
+    @NotNull(message = "Длина города должна быть от 3 до 20 символов")
     private String city;
 }

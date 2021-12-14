@@ -8,14 +8,13 @@ import org.tinkoff.notifications.dao.NotificationDao;
 import org.tinkoff.notifications.dto.NotificationDto;
 import org.tinkoff.notifications.model.Notification;
 
-import java.sql.Date;
 import java.util.Calendar;
 
 @Service
 public class NotificationService {
 
-    private NotificationDao notificationDao;
-    private Logger logger = LoggerFactory.getLogger(NotificationService.class);
+    private final NotificationDao notificationDao;
+    private final Logger logger = LoggerFactory.getLogger(NotificationService.class);
 
     public NotificationService(NotificationDao notificationDao) {
         this.notificationDao = notificationDao;

@@ -10,8 +10,8 @@ import org.tinkoff.notifications.model.Employee;
 @Service
 public class EmployeeService {
 
-    private EmployeeDao employeeDao;
-    private Logger logger = LoggerFactory.getLogger(EmployeeService.class);
+    private final EmployeeDao employeeDao;
+    private final Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 
     public EmployeeService(EmployeeDao employeeDao) {
         this.employeeDao = employeeDao;

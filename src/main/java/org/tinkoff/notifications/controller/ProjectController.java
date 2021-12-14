@@ -23,9 +23,9 @@ public class ProjectController {
     }
 
     @GetMapping("/get")
-    public Project findById(@RequestParam("project_id")long project_id) {
+    public Project findById(@RequestParam("project_id") long project_id) {
         Project project = projectService.findById(project_id);
-        if(project == null) {
+        if (project == null) {
             throw NO_PROJECT.exception(String.format("with id %d", project_id));
         }
         return project;
@@ -34,7 +34,7 @@ public class ProjectController {
     @PatchMapping("/update")
     public void updateProject(@RequestBody Project project) {
         Project projectCheck = projectService.findById(project.getId());
-        if(projectCheck == null) {
+        if (projectCheck == null) {
             throw NO_PROJECT.exception(String.format("with id %d", project.getId()));
         }
         projectService.update(project);
@@ -43,7 +43,7 @@ public class ProjectController {
     @DeleteMapping("/delete")
     public void deleteProject(@RequestBody Project project) {
         Project projectCheck = projectService.findById(project.getId());
-        if(projectCheck == null) {
+        if (projectCheck == null) {
             throw NO_PROJECT.exception(String.format("with id %d", project.getId()));
         }
         projectService.delete(project);

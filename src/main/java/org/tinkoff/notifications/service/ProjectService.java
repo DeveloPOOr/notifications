@@ -10,8 +10,8 @@ import org.tinkoff.notifications.model.Project;
 @Service
 public class ProjectService {
 
-    private ProjectDao projectDao;
-    private Logger logger = LoggerFactory.getLogger(ProjectService.class);
+    private final ProjectDao projectDao;
+    private final Logger logger = LoggerFactory.getLogger(ProjectService.class);
 
     public ProjectService(ProjectDao projectDao) {
         this.projectDao = projectDao;
