@@ -1,6 +1,7 @@
 package org.tinkoff.notifications.constraint;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -23,5 +24,10 @@ class ErrorHandlingControllerAdvice {
                     new Violation(fieldError.getField(), fieldError.getDefaultMessage()));
         }
         return error;
+    }
+
+    @ExceptionHandler(ApplicationError.ApplicationException.class)
+    public ResponseEntity<ApplicationError.ApplicationException.ApplicationExceptionCompanion> handleException(ApplicationError.ApplicationException e){
+        return ResponseEntity.status(e.companion.code()).body(e.companion);
     }
 }

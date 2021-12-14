@@ -7,6 +7,8 @@ import org.tinkoff.notifications.service.EmployeeService;
 
 import javax.validation.Valid;
 
+import static org.tinkoff.notifications.constraint.ApplicationError.NO_EMPLOYEE;
+
 @RestController
 @RequestMapping("/api/employee")
 public class EmployeeController {
@@ -25,16 +27,28 @@ public class EmployeeController {
     @GetMapping("/get")
     public Employee findById(@RequestParam("employee_id")long employee_id) {
         Employee employee = employeeService.findById(employee_id);
+        if(employee == null) {
+            throw NO_EMPLOYEE.exception(String.format("with id %d", employee_id));
+        }
         return employee;
     }
 
     @PatchMapping("/update")
     public void updateEmployee(@RequestBody @Valid Employee employee) {
+        Employee employeeCheck = employeeService.findById(employee.getId());
+        if(employeeCheck == null) {
+            throw NO_EMPLOYEE.exception(String.format("with id %d", employee.getId()));
+        }
         employeeService.update(employee);
     }
 
     @DeleteMapping("/delete")
     public void deleteEmployee(@RequestBody @Valid Employee employee) {
+        Employee employeeCheck = employeeService.findById(employee.getId());
+        if(employeeCheck == null) {
+            throw NO_EMPLOYEE.exception(String.format("with id %d", employee.getId()));
+        }
         employeeService.delete(employee);
     }
+
 }

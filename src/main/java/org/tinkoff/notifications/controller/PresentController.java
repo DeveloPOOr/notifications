@@ -5,6 +5,8 @@ import org.tinkoff.notifications.dto.PresentDto;
 import org.tinkoff.notifications.model.Present;
 import org.tinkoff.notifications.service.PresentService;
 
+import static org.tinkoff.notifications.constraint.ApplicationError.NO_PRESENT;
+
 @RestController
 @RequestMapping("/api/present")
 public class PresentController {
@@ -23,16 +25,27 @@ public class PresentController {
     @GetMapping("/get")
     public Present findById(@RequestParam("present_id")long present_id) {
         Present present = presentService.findById(present_id);
+        if(present == null) {
+            throw NO_PRESENT.exception(String.format("with id %d", present_id));
+        }
         return present;
     }
 
     @PatchMapping("/update")
     public void updatePresent(@RequestBody Present present) {
+        Present presentCheck = presentService.findById(present.getId());
+        if(presentCheck == null) {
+            throw NO_PRESENT.exception(String.format("with id %d", present.getId()));
+        }
         presentService.update(present);
     }
 
     @DeleteMapping("/delete")
     public void deletePresent(@RequestBody Present present) {
+        Present presentCheck = presentService.findById(present.getId());
+        if(presentCheck == null) {
+            throw NO_PRESENT.exception(String.format("with id %d", present.getId()));
+        }
         presentService.delete(present);
     }
 }

@@ -37,7 +37,8 @@
         FROM notification n
                  JOIN employee
                       ON n.employee_id = employee.id
-                 JOIN project proj ON employee.project_id = proj.id
+                 JOIN employee_project_relationship epr ON employee.id = epr.employee_id
+                 JOIN project proj ON epr.project_id = proj.id
                  JOIN present pres ON employee.id = pres.employee_id
         WHERE n.id = #{id}
     </select>

@@ -17,8 +17,6 @@ import java.util.Set;
 public class Employee {
 
     private long id;
-    private Set<Project> projects;
-    private List<Present> wishlist;
 
     @Length(min = 3, max = 40, message = "Длина ФИО должна быть от 3 до 40 символов")
     @NotNull(message = "Длина ФИО должна быть от 3 до 40 символов")
@@ -27,6 +25,8 @@ public class Employee {
     @Pattern(regexp = "^((\\+7|7|8)+([0-9]){10})$", message = "Введите пожалуйста корректный номер")
     private String phone;
 
+    private Set<Project> projects;
+
     @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Введите корректую дату рождения")
     @NotNull(message = "Введите корректую дату рождения")
     private String birthday;
@@ -34,6 +34,8 @@ public class Employee {
     @Pattern(regexp = "\\d{4}-\\d{2}-\\d{2}", message = "Введите корректную дату начала работы")
     @NotNull(message = "Введите корректную дату начала работы")
     private String start_work;
+
+    private List<Present> wishlist;
 
     @Length(min = 3, max = 20, message = "Длина города должна быть от 3 до 20 символов")
     @NotNull(message = "Длина города должна быть от 3 до 20 символов" )
