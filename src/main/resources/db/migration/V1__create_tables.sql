@@ -1,3 +1,15 @@
+drop table IF EXISTS employee_project_relationship;
+
+drop table IF EXISTS project;
+
+drop table IF EXISTS present;
+
+drop table IF EXISTS colleague_notification;
+
+drop table IF EXISTS notification;
+
+drop table IF EXISTS employee;
+
 CREATE TABLE project
 (
     id          SERIAL PRIMARY KEY,

@@ -54,4 +54,5 @@ public class NotificationController {
         }
         notificationService.delete(notification);
     }
+
 }

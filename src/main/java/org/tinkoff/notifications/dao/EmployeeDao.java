@@ -15,4 +15,5 @@ public interface EmployeeDao {
     void update(Employee course);
 
     void delete(Employee course);
+
 }

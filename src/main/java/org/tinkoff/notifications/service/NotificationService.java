@@ -9,6 +9,7 @@ import org.tinkoff.notifications.dto.NotificationDto;
 import org.tinkoff.notifications.model.Notification;
 
 import java.util.Calendar;
+import java.util.Set;
 
 @Service
 public class NotificationService {
@@ -41,6 +42,12 @@ public class NotificationService {
         logger.info("Notification " + notification + " was deleted");
     }
 
+    public Set<Notification> getColleaguesNotificationsById(long id) {
+        Set<Notification> notifications = notificationDao.getColleaguesNotificationByEmployeeId(id);
+        logger.info("Notifications for employee with id " + id + " were found");
+        return notifications;
+    }
+
     @Scheduled(fixedDelayString = "${notifications.delay}")
     public void createNotifications() {
         java.sql.Date startPeriod = new java.sql.Date(new java.util.Date().getTime());
@@ -50,8 +57,10 @@ public class NotificationService {
         java.sql.Date endPeriod = new java.sql.Date(c.getTimeInMillis());
 //        java.sql.Date startPeriod = Date.valueOf("1999-12-20");
 //        java.sql.Date endPeriod = new java.sql.Date(new java.util.Date().getTime());
+        logger.info("startPeriod: " + startPeriod + " endPeriod: " + endPeriod);
         notificationDao.createBirthdays(startPeriod, endPeriod);
         notificationDao.createAnniversaries(startPeriod, endPeriod);
+        notificationDao.createColleagueNotifications();
     }
 
 }

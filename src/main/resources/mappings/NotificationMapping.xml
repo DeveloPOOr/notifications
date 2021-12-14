@@ -13,6 +13,7 @@
         </association>
     </resultMap>
 
+
     <insert id="save">
         INSERT INTO notification (type, employee_id)
         VALUES (#{type}, #{employee.id})
@@ -23,8 +24,8 @@
         INSERT INTO notification (type, employee_id)
         SELECT 'BIRTHDAY', id
         FROM employee e
-        WHERE (e.birthday >= #{startPeriod})
-          AND (e.birthday <= #{endPeriod})
+        WHERE (date_part('day', e.birthday::timestamp) >= date_part('day', #{startPeriod}::timestamp)) AND (date_part('month', e.birthday::timestamp) >= date_part('month', #{startPeriod}::timestamp))
+          AND (date_part('day', e.birthday::timestamp) <= date_part('day', #{endPeriod}::timestamp)) AND (date_part('month', e.birthday::timestamp) <= date_part('month', #{endPeriod}::timestamp))
         ON CONFLICT DO NOTHING
         ]]>;
 
@@ -34,11 +35,28 @@
         INSERT INTO notification (type, employee_id)
         SELECT 'ANNIVERSARY', id
         FROM employee e
-        WHERE (e.birthday >= #{startPeriod})
-          AND (e.birthday <= #{endPeriod})
+        WHERE (date_part('day', e.start_work::timestamp) >= date_part('day', #{startPeriod}::timestamp)) AND (date_part('month', e.start_work::timestamp) >= date_part('month', #{startPeriod}::timestamp))
+          AND (date_part('day', e.start_work::timestamp) <= date_part('day', #{endPeriod}::timestamp)) AND (date_part('month', e.start_work::timestamp) <= date_part('month', #{endPeriod}::timestamp))
         ON CONFLICT DO NOTHING
         ]]>;
 
+    </insert>
+    <insert id="createColleagueNotifications">
+        <![CDATA[
+        INSERT INTO colleague_notification (notification_id, colleague_id)
+        SELECT n.id, every_employee.id
+        FROM employee party_employee
+                 JOIN notification n ON party_employee.id = n.employee_id
+                 JOIN employee_project_relationship epr ON party_employee.id = epr.employee_id
+                 JOIN project p ON epr.project_id = p.id
+                 JOIN
+             (SELECT e2.id AS id, p2.id AS project_id
+              FROM employee e2
+                       JOIN employee_project_relationship epr2 ON e2.id = epr2.employee_id
+                       JOIN project p2 ON p2.id = epr2.project_id) every_employee ON every_employee.project_id = p.id
+        WHERE party_employee.id != every_employee.id
+        ON CONFLICT DO NOTHING
+        ]]>;
     </insert>
 
     <select id="findById" resultMap="NotificationMap">
@@ -64,6 +82,32 @@
                  JOIN project proj ON epr.project_id = proj.id
                  JOIN present pres ON employee.id = pres.employee_id
         WHERE n.id = #{id}
+    </select>
+
+    <select id="getColleaguesNotificationByEmployeeId"
+            resultMap="NotificationMap" resultType="java.util.HashSet">
+        SELECT n.id             AS n_id,
+               n.type           AS n_type,
+               n.employee_id    AS e_id,
+               e.birthday       AS e_birthday,
+               e.phone          AS e_phone,
+               e.start_work     AS e_start_work,
+               e.full_name      AS e_full_name,
+               e.city           AS e_city,
+               proj.id          AS proj_id,
+               proj.name        AS proj_name,
+               proj.description AS proj_description,
+               pres.id          AS pres_id,
+               pres.name        AS pres_name,
+               pres.link        AS pres_link,
+               pres.description AS pres_description
+        FROM colleague_notification cn
+                 JOIN notification n on cn.notification_id = n.id
+                 JOIN employee e ON n.employee_id = e.id
+                 JOIN employee_project_relationship epr on e.id = epr.employee_id
+                 JOIN project proj ON epr.project_id = proj.id
+                 JOIN present pres ON n.employee_id = pres.employee_id
+        WHERE cn.colleague_id = #{employee_id}
     </select>
 
     <update id="update" parameterType="Notification">

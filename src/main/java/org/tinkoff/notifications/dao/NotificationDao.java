@@ -5,6 +5,7 @@ import org.tinkoff.notifications.dto.NotificationDto;
 import org.tinkoff.notifications.model.Notification;
 
 import java.sql.Date;
+import java.util.Set;
 
 
 @Mapper
@@ -21,4 +22,8 @@ public interface NotificationDao {
     void createBirthdays(Date startPeriod, Date endPeriod);
 
     void createAnniversaries(Date startPeriod, Date endPeriod);
+
+    void createColleagueNotifications();
+
+    Set<Notification> getColleaguesNotificationByEmployeeId(long employee_id);
 }

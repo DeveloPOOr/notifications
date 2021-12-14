@@ -3,9 +3,13 @@ package org.tinkoff.notifications.controller;
 import org.springframework.web.bind.annotation.*;
 import org.tinkoff.notifications.dto.EmployeeDto;
 import org.tinkoff.notifications.model.Employee;
+import org.tinkoff.notifications.model.Notification;
 import org.tinkoff.notifications.service.EmployeeService;
+import org.tinkoff.notifications.service.NotificationService;
 
 import javax.validation.Valid;
+
+import java.util.Set;
 
 import static org.tinkoff.notifications.constraint.ApplicationError.NO_EMPLOYEE;
 
@@ -14,9 +18,11 @@ import static org.tinkoff.notifications.constraint.ApplicationError.NO_EMPLOYEE;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final NotificationService notificationService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, NotificationService notificationService) {
         this.employeeService = employeeService;
+        this.notificationService = notificationService;
     }
 
     @PostMapping("/save")
@@ -51,4 +57,12 @@ public class EmployeeController {
         employeeService.delete(employee);
     }
 
+    @GetMapping("/getMyNotifications")
+    public Set<Notification> getMyNotifications(@RequestParam("employee_id") long employee_id) {
+        Employee employee = employeeService.findById(employee_id);
+        if (employee == null) {
+            throw NO_EMPLOYEE.exception(String.format("with id %d", employee_id));
+        }
+        return notificationService.getColleaguesNotificationsById(employee_id);
+    }
 }
