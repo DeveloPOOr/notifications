@@ -15,7 +15,9 @@ public class PresentDto {
     @NotNull(message = "Имя подарка быть от 3 до 40 символов")
     private String name;
 
-    @Pattern(regexp = "(http|ftp|https)://([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?")
+    @Pattern(
+            regexp =
+                    "(http|ftp|https)://([\\w_-]+(?:(?:\\.[\\w_-]+)+))([\\w.,@?^=%&:/~+#-]*[\\w@?^=%&/~+#-])?")
     private String link;
 
     @Length(max = 200, message = "Описание подарка слишком длинное")

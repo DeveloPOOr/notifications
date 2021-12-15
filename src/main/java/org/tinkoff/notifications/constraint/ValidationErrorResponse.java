@@ -9,7 +9,4 @@ import java.util.List;
 public class ValidationErrorResponse {
 
     private List<Violation> violations = new ArrayList<>();
-
 }
-
-

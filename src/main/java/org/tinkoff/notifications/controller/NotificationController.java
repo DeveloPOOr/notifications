@@ -16,13 +16,16 @@ public class NotificationController {
     private final NotificationService notificationService;
     private final EmployeeService employeeService;
 
-    public NotificationController(NotificationService notificationService, EmployeeService employeeService) {
+    public NotificationController(
+            NotificationService notificationService, EmployeeService employeeService) {
         this.notificationService = notificationService;
         this.employeeService = employeeService;
     }
 
     @PostMapping("/save")
-    public void saveNotification(@RequestBody NotificationDto notificationDto, @RequestParam("employee_id") long employee_id) {
+    public void saveNotification(
+            @RequestBody NotificationDto notificationDto,
+            @RequestParam("employee_id") long employee_id) {
         Employee employee = employeeService.findById(employee_id);
         notificationDto.setEmployee(employee);
         notificationService.save(notificationDto);
@@ -54,5 +57,4 @@ public class NotificationController {
         }
         notificationService.delete(notification);
     }
-
 }

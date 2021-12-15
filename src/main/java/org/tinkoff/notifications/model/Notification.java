@@ -13,7 +13,9 @@ import javax.validation.constraints.Pattern;
 public class Notification {
     private long id;
 
-    @Pattern(regexp = "(ANNIVERSIRY)|(BIRTHDAY)", message = "Уведомлеие либо день рождение либо годовщина")
+    @Pattern(
+            regexp = "(ANNIVERSIRY)|(BIRTHDAY)",
+            message = "Уведомлеие либо день рождение либо годовщина")
     @NotNull(message = "Уведомлеие либо день рождение либо годовщина")
     private String type;
 

@@ -8,7 +8,6 @@ import org.tinkoff.notifications.service.EmployeeService;
 import org.tinkoff.notifications.service.NotificationService;
 
 import javax.validation.Valid;
-
 import java.util.Set;
 
 import static org.tinkoff.notifications.constraint.ApplicationError.NO_EMPLOYEE;
@@ -20,7 +19,8 @@ public class EmployeeController {
     private final EmployeeService employeeService;
     private final NotificationService notificationService;
 
-    public EmployeeController(EmployeeService employeeService, NotificationService notificationService) {
+    public EmployeeController(
+            EmployeeService employeeService, NotificationService notificationService) {
         this.employeeService = employeeService;
         this.notificationService = notificationService;
     }

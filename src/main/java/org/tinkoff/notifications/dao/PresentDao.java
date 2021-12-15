@@ -4,7 +4,6 @@ import org.apache.ibatis.annotations.Mapper;
 import org.tinkoff.notifications.dto.PresentDto;
 import org.tinkoff.notifications.model.Present;
 
-
 @Mapper
 public interface PresentDao {
     void save(PresentDto present, long employeeId);

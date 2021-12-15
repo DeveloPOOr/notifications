@@ -7,7 +7,6 @@ import org.tinkoff.notifications.model.Notification;
 import java.sql.Date;
 import java.util.Set;
 
-
 @Mapper
 public interface NotificationDao {
 

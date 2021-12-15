@@ -19,7 +19,11 @@ public class PresentService {
 
     public void save(PresentDto presentDto, long employeeId) {
         presentDao.save(presentDto, employeeId);
-        logger.info("Present " + presentDto + " was saved to employee's wishlist with id " + employeeId);
+        logger.info(
+                "Present "
+                        + presentDto
+                        + " was saved to employee's wishlist with id "
+                        + employeeId);
     }
 
     public Present findById(long id) {
@@ -37,5 +41,4 @@ public class PresentService {
         presentDao.delete(present);
         logger.info("Present " + present + " was deleted");
     }
-
 }

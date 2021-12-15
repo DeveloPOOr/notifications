@@ -37,5 +37,4 @@ public class ProjectService {
         projectDao.delete(project);
         logger.info("Project " + project + " was deleted");
     }
-
 }

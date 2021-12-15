@@ -37,5 +37,4 @@ public class EmployeeService {
         employeeDao.delete(employee);
         logger.info("Employee " + employee + " was deleted");
     }
-
 }

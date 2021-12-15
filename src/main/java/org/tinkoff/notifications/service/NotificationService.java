@@ -23,7 +23,11 @@ public class NotificationService {
 
     public void save(NotificationDto notificationDto) {
         notificationDao.save(notificationDto);
-        logger.info("Notification " + notificationDto + " was saved to employee with id " + notificationDto.getEmployee().getId());
+        logger.info(
+                "Notification "
+                        + notificationDto
+                        + " was saved to employee with id "
+                        + notificationDto.getEmployee().getId());
     }
 
     public Notification findById(long id) {
@@ -55,12 +59,11 @@ public class NotificationService {
         c.setTime(startPeriod);
         c.add(Calendar.DATE, 7);
         java.sql.Date endPeriod = new java.sql.Date(c.getTimeInMillis());
-//        java.sql.Date startPeriod = Date.valueOf("1999-12-20");
-//        java.sql.Date endPeriod = new java.sql.Date(new java.util.Date().getTime());
+        //        java.sql.Date startPeriod = Date.valueOf("1999-12-20");
+        //        java.sql.Date endPeriod = new java.sql.Date(new java.util.Date().getTime());
         logger.info("startPeriod: " + startPeriod + " endPeriod: " + endPeriod);
         notificationDao.createBirthdays(startPeriod, endPeriod);
         notificationDao.createAnniversaries(startPeriod, endPeriod);
         notificationDao.createColleagueNotifications();
     }
-
 }

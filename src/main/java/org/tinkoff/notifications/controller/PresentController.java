@@ -18,7 +18,8 @@ public class PresentController {
     }
 
     @PostMapping("/save")
-    public void savePresent(@RequestBody PresentDto presentDto, @RequestParam("employee_id") long employee_id) {
+    public void savePresent(
+            @RequestBody PresentDto presentDto, @RequestParam("employee_id") long employee_id) {
         presentService.save(presentDto, employee_id);
     }
 

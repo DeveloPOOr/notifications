@@ -11,10 +11,11 @@ import javax.validation.constraints.Pattern;
 @AllArgsConstructor
 public class NotificationDto {
 
-    @Pattern(regexp = "(ANNIVERSIRY)|(BIRTHDAY)", message = "Уведомлеие либо день рождение либо годовщина")
-    @NotNull(message = "Уведомлеие либо день рождение либо годовщина")
+    @Pattern(
+            regexp = "(ANNIVERSIRY)|(BIRTHDAY)",
+            message = "Уведомлеие либо день рождение либо годовщина")
+    @NotNull(message = "Уведомление либо день рождение либо годовщина")
     private String type;
 
     private Employee employee;
 }
-

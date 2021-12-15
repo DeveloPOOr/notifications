@@ -1,6 +1,5 @@
 package org.tinkoff.notifications.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

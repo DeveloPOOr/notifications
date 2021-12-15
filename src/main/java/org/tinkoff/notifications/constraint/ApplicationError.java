@@ -1,7 +1,6 @@
 package org.tinkoff.notifications.constraint;
 
 public enum ApplicationError {
-
     NO_EMPLOYEE("No such employee", 404),
     NO_PRESENT("No such present", 404),
     NO_PROJECT("No such project¨", 404),
@@ -25,13 +24,10 @@ public enum ApplicationError {
 
         ApplicationException(ApplicationError error, String message) {
             super(error.message + " : " + message);
-            this.companion = new ApplicationExceptionCompanion(error.code, error.message + " " + message);
+            this.companion =
+                    new ApplicationExceptionCompanion(error.code, error.message + " " + message);
         }
 
-        public record ApplicationExceptionCompanion(int code, String message) {
-        }
-
+        public record ApplicationExceptionCompanion(int code, String message) {}
     }
 }
-
-
