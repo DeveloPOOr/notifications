@@ -13,8 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ActiveProfiles("test")
 public class ProjectDaoTest {
 
-    @Autowired
-    private ProjectDao projectDao;
+    @Autowired private ProjectDao projectDao;
 
     @Test
     public void saveProject() {
@@ -24,11 +23,8 @@ public class ProjectDaoTest {
 
     @Test
     public void getProject() {
-        assertEquals(projectDao.findById(1L), new Project(
-                1L,
-                "Тинькофф инвестиции",
-                "Про инвестиции"
-        ));
+        assertEquals(
+                projectDao.findById(1L), new Project(1L, "Тинькофф инвестиции", "Про инвестиции"));
     }
 
     @Test
@@ -45,19 +41,11 @@ public class ProjectDaoTest {
         assertEquals(projectDao.findById(3L), null);
     }
 
-
     public Project preparedProject(long id) {
-        return new Project(
-                id,
-                "TestName",
-                "good Present"
-        );
+        return new Project(id, "TestName", "good Present");
     }
 
     public ProjectDto preparedProjectDto() {
-        return new ProjectDto(
-                "TestName",
-                "good Present"
-        );
+        return new ProjectDto("TestName", "good Present");
     }
 }

@@ -14,20 +14,20 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ActiveProfiles("test")
 class NotificationDaoTest {
 
-    @Autowired
-    private NotificationDao notificationDao;
-    @Autowired
-    private EmployeeDao employeeDao;
+    @Autowired private NotificationDao notificationDao;
+    @Autowired private EmployeeDao employeeDao;
 
     @Test
     public void save() {
         notificationDao.save(preparedNotificationDto(employeeDao.findById(1L)));
-        assertEquals(notificationDao.findById(1L), preparedNotification(1L, employeeDao.findById(1L)));
+        assertEquals(
+                notificationDao.findById(1L), preparedNotification(1L, employeeDao.findById(1L)));
     }
 
     @Test
     public void findByIdTest() {
-        assertEquals(preparedNotification(2L, employeeDao.findById(2L)), notificationDao.findById(2L));
+        assertEquals(
+                preparedNotification(2L, employeeDao.findById(2L)), notificationDao.findById(2L));
     }
 
     @Test
@@ -45,20 +45,11 @@ class NotificationDaoTest {
         assertEquals(notificationDao.findById(3L), null);
     }
 
-
     public Notification preparedNotification(long id, Employee employee) {
-        return new Notification(
-                id,
-                "BIRTHDAY",
-                employee
-
-        );
+        return new Notification(id, "BIRTHDAY", employee);
     }
 
     public NotificationDto preparedNotificationDto(Employee employee) {
-        return new NotificationDto(
-                "BIRTHDAY",
-                employee
-        );
+        return new NotificationDto("BIRTHDAY", employee);
     }
 }

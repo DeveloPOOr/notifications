@@ -13,17 +13,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @ActiveProfiles("test")
 class PresentDaoTest {
 
-    @Autowired
-    private PresentDao presentDao;
+    @Autowired private PresentDao presentDao;
 
     @Test
     public void savePresent() {
         presentDao.save(preparedPresentDto(), 1L);
-        assertEquals(presentDao.findById(7L), new Present(
-                7,
-                "TestName",
-                "www.present.com",
-                "good Present"));
+        assertEquals(
+                presentDao.findById(7L),
+                new Present(7, "TestName", "www.present.com", "good Present"));
     }
 
     @Test
@@ -46,19 +43,10 @@ class PresentDaoTest {
     }
 
     public Present preparedPresent(long id) {
-        return new Present(
-                id,
-                "Подарок" + id,
-                "ссылка" + id,
-                "описание" + id
-        );
+        return new Present(id, "Подарок" + id, "ссылка" + id, "описание" + id);
     }
 
     public PresentDto preparedPresentDto() {
-        return new PresentDto(
-                "TestName",
-                "www.present.com",
-                "good Present"
-        );
+        return new PresentDto("TestName", "www.present.com", "good Present");
     }
 }

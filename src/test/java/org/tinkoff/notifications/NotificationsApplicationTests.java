@@ -7,7 +7,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 class NotificationsApplicationTests {
 
     @Test
-    void contextLoads() {
-    }
-
+    void contextLoads() {}
 }
