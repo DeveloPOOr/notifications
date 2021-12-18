@@ -13,8 +13,8 @@ public class NotificationDto {
 
     @Pattern(
             regexp = "(ANNIVERSIRY)|(BIRTHDAY)",
-            message = "Уведомлеие либо день рождение либо годовщина")
-    @NotNull(message = "Уведомление либо день рождение либо годовщина")
+            message = "Уведомление либо день рождения либо годовщина")
+    @NotNull(message = "Уведомление либо день рождения либо годовщина")
     private String type;
 
     private Employee employee;
