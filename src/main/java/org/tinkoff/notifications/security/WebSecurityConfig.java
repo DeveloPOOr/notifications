@@ -36,6 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                                         passwordEncoder().encode(env.getProperty("admin.password")))
                                 .authorities(Role.ADMIN.getGrantedAuthority())
                                 .build());
+        
         return manager;
     }
 
