@@ -1,7 +1,6 @@
 package org.tinkoff.notifications.controller;
 
 import org.springframework.web.bind.annotation.*;
-import org.tinkoff.notifications.dto.EmployeeDto;
 import org.tinkoff.notifications.model.Employee;
 import org.tinkoff.notifications.model.Notification;
 import org.tinkoff.notifications.service.EmployeeService;
@@ -26,8 +25,9 @@ public class EmployeeController {
     }
 
     @PostMapping("/save")
-    public void saveEmployee(@RequestBody @Valid EmployeeDto employeeDto) {
-        employeeService.save(employeeDto);
+    public Employee saveEmployee(@RequestBody @Valid Employee employee) {
+
+        return employeeService.save(employee);
     }
 
     @GetMapping("/get")

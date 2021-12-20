@@ -25,7 +25,7 @@
             <result property="description" column="pres_description"/>
         </collection>
     </resultMap>
-    <insert id="save">
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO employee (birthday, phone, start_work, full_name, city)
         VALUES (TO_DATE(#{birthday}, 'YYYY-MM-DD'), #{phone}, TO_DATE(#{start_work}, 'YYYY-MM-DD'), #{full_name}, #{city})
     </insert>

@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.tinkoff.notifications.dao.EmployeeDao;
-import org.tinkoff.notifications.dto.EmployeeDto;
 import org.tinkoff.notifications.model.Employee;
 
 @Service
@@ -17,9 +16,10 @@ public class EmployeeService {
         this.employeeDao = employeeDao;
     }
 
-    public void save(EmployeeDto employeeDto) {
-        employeeDao.save(employeeDto);
-        logger.info("Employee " + employeeDto + " was saved");
+    public Employee save(Employee employee) {
+        employeeDao.save(employee);
+        logger.info("Employee " + employee + " was saved");
+        return employee;
     }
 
     public Employee findById(long id) {
