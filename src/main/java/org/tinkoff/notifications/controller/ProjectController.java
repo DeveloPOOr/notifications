@@ -1,9 +1,10 @@
 package org.tinkoff.notifications.controller;
 
 import org.springframework.web.bind.annotation.*;
-import org.tinkoff.notifications.dto.ProjectDto;
 import org.tinkoff.notifications.model.Project;
 import org.tinkoff.notifications.service.ProjectService;
+
+import javax.validation.Valid;
 
 import static org.tinkoff.notifications.constraint.ApplicationError.NO_PROJECT;
 
@@ -18,8 +19,8 @@ public class ProjectController {
     }
 
     @PostMapping("/save")
-    public void saveProject(@RequestBody ProjectDto projectDto) {
-        projectService.save(projectDto);
+    public Project saveProject(@RequestBody @Valid Project project) {
+        return projectService.save(project);
     }
 
     @GetMapping("/get")
@@ -32,7 +33,7 @@ public class ProjectController {
     }
 
     @PatchMapping("/update")
-    public void updateProject(@RequestBody Project project) {
+    public void updateProject(@RequestBody @Valid Project project) {
         Project projectCheck = projectService.findById(project.getId());
         if (projectCheck == null) {
             throw NO_PROJECT.exception(String.format("with id %d", project.getId()));
@@ -41,7 +42,7 @@ public class ProjectController {
     }
 
     @DeleteMapping("/delete")
-    public void deleteProject(@RequestBody Project project) {
+    public void deleteProject(@RequestBody @Valid Project project) {
         Project projectCheck = projectService.findById(project.getId());
         if (projectCheck == null) {
             throw NO_PROJECT.exception(String.format("with id %d", project.getId()));

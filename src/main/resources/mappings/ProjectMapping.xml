@@ -6,7 +6,7 @@
 
 <mapper namespace="org.tinkoff.notifications.dao.ProjectDao">
 
-    <insert id="save">
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO project (name, description)
         VALUES (#{name}, #{description})
     </insert>

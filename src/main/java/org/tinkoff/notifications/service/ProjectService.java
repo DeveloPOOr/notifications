@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.tinkoff.notifications.dao.ProjectDao;
-import org.tinkoff.notifications.dto.ProjectDto;
 import org.tinkoff.notifications.model.Project;
 
 @Service
@@ -17,9 +16,10 @@ public class ProjectService {
         this.projectDao = projectDao;
     }
 
-    public void save(ProjectDto projectDto) {
-        projectDao.save(projectDto);
-        logger.info("Project " + projectDto + " was saved");
+    public Project save(Project project) {
+        projectDao.save(project);
+        logger.info("Project " + project + " was saved");
+        return project;
     }
 
     public Project findById(long id) {
