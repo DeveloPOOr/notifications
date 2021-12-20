@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.tinkoff.notifications.dao.PresentDao;
-import org.tinkoff.notifications.dto.PresentDto;
 import org.tinkoff.notifications.model.Present;
 
 @Service
@@ -17,13 +16,14 @@ public class PresentService {
         this.presentDao = presentDao;
     }
 
-    public void save(PresentDto presentDto, long employeeId) {
-        presentDao.save(presentDto, employeeId);
+    public Present save(Present present, long employeeId) {
+        presentDao.save(present, employeeId);
         logger.info(
                 "Present "
-                        + presentDto
+                        + present
                         + " was saved to employee's wishlist with id "
                         + employeeId);
+        return present;
     }
 
     public Present findById(long id) {

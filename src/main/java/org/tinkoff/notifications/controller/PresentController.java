@@ -1,10 +1,12 @@
 package org.tinkoff.notifications.controller;
 
 import org.springframework.web.bind.annotation.*;
-import org.tinkoff.notifications.dto.PresentDto;
+import org.tinkoff.notifications.model.Employee;
 import org.tinkoff.notifications.model.Present;
+import org.tinkoff.notifications.service.EmployeeService;
 import org.tinkoff.notifications.service.PresentService;
 
+import static org.tinkoff.notifications.constraint.ApplicationError.NO_EMPLOYEE;
 import static org.tinkoff.notifications.constraint.ApplicationError.NO_PRESENT;
 
 @RestController
@@ -12,15 +14,21 @@ import static org.tinkoff.notifications.constraint.ApplicationError.NO_PRESENT;
 public class PresentController {
 
     private final PresentService presentService;
+    private final EmployeeService employeeService;
 
-    public PresentController(PresentService presentService) {
+    public PresentController(PresentService presentService, EmployeeService employeeService) {
         this.presentService = presentService;
+        this.employeeService = employeeService;
     }
 
     @PostMapping("/save")
-    public void savePresent(
-            @RequestBody PresentDto presentDto, @RequestParam("employee_id") long employee_id) {
-        presentService.save(presentDto, employee_id);
+    public Present savePresent(
+            @RequestBody Present present, @RequestParam("employee_id") long employee_id) {
+        Employee employee = employeeService.findById(employee_id);
+        if (employee == null) {
+            throw NO_EMPLOYEE.exception(String.format("with id %d", employee_id));
+        }
+        return presentService.save(present, employee_id);
     }
 
     @GetMapping("/get")

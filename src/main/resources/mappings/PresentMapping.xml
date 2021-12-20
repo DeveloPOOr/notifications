@@ -6,7 +6,7 @@
 
 <mapper namespace="org.tinkoff.notifications.dao.PresentDao">
 
-    <insert id="save">
+    <insert id="save" useGeneratedKeys="true" keyProperty="present.id" keyColumn="id">
         INSERT INTO present (name, link, description, employee_id)
         VALUES (#{present.name}, #{present.link}, #{present.description}, #{employeeId})
     </insert>
