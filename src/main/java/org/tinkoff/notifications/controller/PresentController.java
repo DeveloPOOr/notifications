@@ -6,6 +6,8 @@ import org.tinkoff.notifications.model.Present;
 import org.tinkoff.notifications.service.EmployeeService;
 import org.tinkoff.notifications.service.PresentService;
 
+import javax.validation.Valid;
+
 import static org.tinkoff.notifications.constraint.ApplicationError.NO_EMPLOYEE;
 import static org.tinkoff.notifications.constraint.ApplicationError.NO_PRESENT;
 
@@ -23,7 +25,7 @@ public class PresentController {
 
     @PostMapping("/save")
     public Present savePresent(
-            @RequestBody Present present, @RequestParam("employee_id") long employee_id) {
+            @RequestBody @Valid Present present, @RequestParam("employee_id") long employee_id) {
         Employee employee = employeeService.findById(employee_id);
         if (employee == null) {
             throw NO_EMPLOYEE.exception(String.format("with id %d", employee_id));
@@ -41,7 +43,7 @@ public class PresentController {
     }
 
     @PatchMapping("/update")
-    public void updatePresent(@RequestBody Present present) {
+    public void updatePresent(@RequestBody @Valid Present present) {
         Present presentCheck = presentService.findById(present.getId());
         if (presentCheck == null) {
             throw NO_PRESENT.exception(String.format("with id %d", present.getId()));
@@ -50,7 +52,7 @@ public class PresentController {
     }
 
     @DeleteMapping("/delete")
-    public void deletePresent(@RequestBody Present present) {
+    public void deletePresent(@RequestBody @Valid Present present) {
         Present presentCheck = presentService.findById(present.getId());
         if (presentCheck == null) {
             throw NO_PRESENT.exception(String.format("with id %d", present.getId()));

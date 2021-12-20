@@ -10,7 +10,7 @@ import java.util.Set;
 @Mapper
 public interface NotificationDao {
 
-    void save(NotificationDto notification);
+    long save(Notification notification);
 
     Notification findById(long id);
 

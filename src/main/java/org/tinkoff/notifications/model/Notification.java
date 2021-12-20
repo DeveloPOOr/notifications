@@ -14,7 +14,7 @@ public class Notification {
     private long id;
 
     @Pattern(
-            regexp = "(ANNIVERSIRY)|(BIRTHDAY)",
+            regexp = "(ANNIVERSARY)|(BIRTHDAY)",
             message = "Уведомление либо день рождения либо годовщина")
     @NotNull(message = "Уведомление либо день рождения либо годовщина")
     private String type;

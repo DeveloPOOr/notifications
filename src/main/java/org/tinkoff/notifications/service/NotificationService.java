@@ -21,13 +21,14 @@ public class NotificationService {
         this.notificationDao = notificationDao;
     }
 
-    public void save(NotificationDto notificationDto) {
-        notificationDao.save(notificationDto);
+    public Notification save(Notification notification) {
+        notificationDao.save(notification);
         logger.info(
                 "Notification "
-                        + notificationDto
+                        + notification
                         + " was saved to employee with id "
-                        + notificationDto.getEmployee().getId());
+                        + notification.getEmployee().getId());
+        return notification;
     }
 
     public Notification findById(long id) {

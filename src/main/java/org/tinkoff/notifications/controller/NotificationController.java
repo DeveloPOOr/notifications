@@ -7,6 +7,9 @@ import org.tinkoff.notifications.model.Notification;
 import org.tinkoff.notifications.service.EmployeeService;
 import org.tinkoff.notifications.service.NotificationService;
 
+import javax.validation.Valid;
+
+import static org.tinkoff.notifications.constraint.ApplicationError.NO_EMPLOYEE;
 import static org.tinkoff.notifications.constraint.ApplicationError.NO_NOTIFICATION;
 
 @RestController
@@ -23,12 +26,15 @@ public class NotificationController {
     }
 
     @PostMapping("/save")
-    public void saveNotification(
-            @RequestBody NotificationDto notificationDto,
+    public Notification saveNotification(
+            @RequestBody @Valid Notification notification,
             @RequestParam("employee_id") long employee_id) {
         Employee employee = employeeService.findById(employee_id);
-        notificationDto.setEmployee(employee);
-        notificationService.save(notificationDto);
+        if (employee == null) {
+            throw NO_EMPLOYEE.exception(String.format("with id %d", employee_id));
+        }
+        notification.setEmployee(employee);
+        return notificationService.save(notification);
     }
 
     @GetMapping("/get")
@@ -41,7 +47,7 @@ public class NotificationController {
     }
 
     @PatchMapping("/update")
-    public void updateNotification(@RequestBody Notification notification) {
+    public void updateNotification(@RequestBody @Valid Notification notification) {
         Notification notificationCheck = notificationService.findById(notification.getId());
         if (notificationCheck == null) {
             throw NO_NOTIFICATION.exception(String.format("with id %d", notification.getId()));
@@ -50,7 +56,7 @@ public class NotificationController {
     }
 
     @DeleteMapping("/delete")
-    public void deleteNotification(@RequestBody Notification notification) {
+    public void deleteNotification(@RequestBody @Valid Notification notification) {
         Notification notificationCheck = notificationService.findById(notification.getId());
         if (notificationCheck == null) {
             throw NO_NOTIFICATION.exception(String.format("with id %d", notification.getId()));

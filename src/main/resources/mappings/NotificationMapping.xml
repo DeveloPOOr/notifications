@@ -14,7 +14,7 @@
     </resultMap>
 
 
-    <insert id="save">
+    <insert id="save" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         INSERT INTO notification (type, employee_id)
         VALUES (#{type}, #{employee.id})
     </insert>
