@@ -1,32 +1,18 @@
--- Table: users
-CREATE TABLE users
+create table users
 (
-    id          SERIAL PRIMARY KEY,
-    username    VARCHAR(255) NOT NULL,
-    password    VARCHAR(255) NOT NULL,
-    employee_id BIGINT       NOT NULL,
-    FOREIGN KEY (employee_id) REFERENCES employee (id) ON DELETE CASCADE,
-)
-
-
--- Table: roles
-CREATE TABLE roles
+    username varchar(50)  not null primary key,
+    password varchar(100) not null,
+    enabled  boolean      not null
+);
+create table authorities
 (
-    id   SERIAL PRIMARY KEY,
-    name VARCHAR(100) NOT NULL
-)
+    username  varchar(50) not null,
+    authority varchar(50) not null,
+    constraint fk_authorities_users foreign key (username) references users (username)
+);
+create unique index ix_auth_username on authorities (username, authority);
 
-
--- Table for mapping user and roles: user_roles
-CREATE TABLE user_roles
-(
-    user_id INT NOT NULL,
-    role_id INT NOT NULL,
-
-    FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
-    FOREIGN KEY (role_id) REFERENCES roles (id) ON DELETE CASCADE,
-
-    UNIQUE (user_id, role_id)
-)
-
-INSERT INTO roles (name) VALUES ('USER_ROLE'), ('ADMIN_ROLE')
+insert into users(username,password,enabled)
+values('admin','$2a$12$gfK44mBkw8e2HCli/nxqMuMSdseKhYf.nGVdKq8CdPHNe.UEy4wCu',true);
+insert into authorities(username,authority)
+values('admin','ROLE_ADMIN');

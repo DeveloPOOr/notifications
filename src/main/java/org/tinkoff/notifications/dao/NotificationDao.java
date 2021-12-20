@@ -1,7 +1,6 @@
 package org.tinkoff.notifications.dao;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.tinkoff.notifications.dto.NotificationDto;
 import org.tinkoff.notifications.model.Notification;
 
 import java.sql.Date;

@@ -1,7 +1,6 @@
 package org.tinkoff.notifications.controller;
 
 import org.springframework.web.bind.annotation.*;
-import org.tinkoff.notifications.dto.NotificationDto;
 import org.tinkoff.notifications.model.Employee;
 import org.tinkoff.notifications.model.Notification;
 import org.tinkoff.notifications.service.EmployeeService;
