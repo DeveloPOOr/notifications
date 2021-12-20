@@ -24,8 +24,4 @@ VALUES ('Подарок1', 'ссылка1', 'описание1', 1),
        ('Подарок6', 'ссылка6', 'описание6', 3);
 
 
--- INSERT INTO notification (type, employee_id)
--- VALUES ('BIRTHDAY', 1),
---        ('BIRTHDAY', 2),
---        ('ANNIVERSARY', 3),
---        ('ANNIVERSARY', 3);
+

@@ -9,8 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>org.tinkoff</groupId>
-	<artifactId>notifications</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>notifications-fintech</artifactId>
 	<name>notifications</name>
 	<description>Fintech Project</description>
 	<properties>

@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @ActiveProfiles("test")
+public
 class PresentDaoTest {
 
     @Autowired private PresentDao presentDao;
