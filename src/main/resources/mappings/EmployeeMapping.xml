@@ -13,6 +13,7 @@
         <result property="start_work" column="e_start_work"/>
         <result property="full_name" column="e_full_name"/>
         <result property="city" column="e_city"/>
+        <result property="username" column="e_username"/>
         <collection property="projects" ofType="Project" javaType="java.util.HashSet">
             <id property="id" column="proj_id"/>
             <result property="name" column="proj_name"/>
@@ -26,8 +27,9 @@
         </collection>
     </resultMap>
     <insert id="save" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
-        INSERT INTO employee (birthday, phone, start_work, full_name, city)
-        VALUES (TO_DATE(#{birthday}, 'YYYY-MM-DD'), #{phone}, TO_DATE(#{start_work}, 'YYYY-MM-DD'), #{full_name}, #{city})
+        INSERT INTO employee (birthday, phone, start_work, full_name, city, username)
+        VALUES (TO_DATE(#{birthday}, 'YYYY-MM-DD'), #{phone}, TO_DATE(#{start_work}, 'YYYY-MM-DD'), #{full_name},
+                #{city}, #{username})
     </insert>
 
     <select id="findById" resultMap="EmployeeMap">
@@ -37,6 +39,7 @@
                employee.start_work AS e_start_work,
                employee.full_name  AS e_full_name,
                employee.city       AS e_city,
+               employee.username   AS e_username,
                proj.id             AS proj_id,
                proj.name           AS proj_name,
                proj.description    AS proj_description,
@@ -53,9 +56,9 @@
 
     <update id="update" parameterType="Employee">
         UPDATE employee
-        SET birthday   = #{birthday},
+        SET birthday   = TO_DATE(#{birthday}, 'YYYY-MM-DD'),
             phone      = #{phone},
-            start_work = #{start_work},
+            start_work = TO_DATE(#{start_work}, 'YYYY-MM-DD'),
             full_name  = #{full_name},
             city       = #{city}
         WHERE id = #{id};

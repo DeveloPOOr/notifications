@@ -8,8 +8,9 @@ import org.tinkoff.notifications.service.NotificationService;
 
 import javax.validation.Valid;
 
-import static org.tinkoff.notifications.constraint.ApplicationError.NO_EMPLOYEE;
-import static org.tinkoff.notifications.constraint.ApplicationError.NO_NOTIFICATION;
+import java.security.Principal;
+
+import static org.tinkoff.notifications.constraint.ApplicationError.*;
 
 @RestController
 @RequestMapping("/api/notification")

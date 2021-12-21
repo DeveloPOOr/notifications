@@ -25,4 +25,6 @@ public class Present {
 
     @Length(max = 200, message = "Описание подарка слишком длинное")
     private String description;
+
+    private long employee_id;
 }

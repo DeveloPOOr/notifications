@@ -12,7 +12,7 @@
     </insert>
 
     <select id="findById" resultType="Present">
-        SELECT id, name, link, description
+        SELECT id, name, link, description, employee_id
         FROM present
         WHERE id = #{id}
     </select>

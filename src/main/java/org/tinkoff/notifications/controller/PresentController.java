@@ -8,8 +8,9 @@ import org.tinkoff.notifications.service.PresentService;
 
 import javax.validation.Valid;
 
-import static org.tinkoff.notifications.constraint.ApplicationError.NO_EMPLOYEE;
-import static org.tinkoff.notifications.constraint.ApplicationError.NO_PRESENT;
+import java.security.Principal;
+
+import static org.tinkoff.notifications.constraint.ApplicationError.*;
 
 @RestController
 @RequestMapping("/api/present")
@@ -25,10 +26,13 @@ public class PresentController {
 
     @PostMapping("/save")
     public Present savePresent(
-            @RequestBody @Valid Present present, @RequestParam("employee_id") long employee_id) {
+            @RequestBody @Valid Present present, @RequestParam("employee_id") long employee_id, Principal principal) {
         Employee employee = employeeService.findById(employee_id);
         if (employee == null) {
             throw NO_EMPLOYEE.exception(String.format("with id %d", employee_id));
+        }
+        if(!principal.getName().equals(employee.getUsername())) {
+            throw ACCESS_DENIED.exception("");
         }
         return presentService.save(present, employee_id);
     }
@@ -43,20 +47,26 @@ public class PresentController {
     }
 
     @PatchMapping("/update")
-    public void updatePresent(@RequestBody @Valid Present present) {
-        Present presentCheck = presentService.findById(present.getId());
-        if (presentCheck == null) {
-            throw NO_PRESENT.exception(String.format("with id %d", present.getId()));
-        }
+    public void updatePresent(@RequestBody @Valid Present present, Principal principal) {
+        checkAuth(present, principal);
         presentService.update(present);
     }
 
     @DeleteMapping("/delete")
-    public void deletePresent(@RequestBody @Valid Present present) {
+    public void deletePresent(@RequestBody @Valid Present present, Principal principal) {
+        checkAuth(present, principal);
+        presentService.delete(present);
+    }
+
+    private void checkAuth(@RequestBody @Valid Present present, Principal principal) {
         Present presentCheck = presentService.findById(present.getId());
         if (presentCheck == null) {
             throw NO_PRESENT.exception(String.format("with id %d", present.getId()));
         }
-        presentService.delete(present);
+        Employee employee = employeeService.findById(presentCheck.getEmployee_id());
+        if(!principal.getName().equals(employee.getUsername())) {
+            throw ACCESS_DENIED.exception("");
+        }
     }
+
 }

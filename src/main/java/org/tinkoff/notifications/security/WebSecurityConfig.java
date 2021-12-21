@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired private DataSource dataSource;
 
     @Bean
-    public UserDetailsService userDetailsService() {
+    public JdbcUserDetailsManager userDetailsService() {
         JdbcUserDetailsManager manager = new JdbcUserDetailsManager(dataSource);
         return manager;
     }
@@ -36,19 +36,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf()
                 .disable()
-                .headers()
-                .frameOptions()
-                .disable()
-                .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/**")
-                .hasAnyRole("USER", "ADMIN")
-                .antMatchers(HttpMethod.POST, "/**")
-                .hasRole("ADMIN")
-                .antMatchers(HttpMethod.PATCH, "/**")
-                .hasRole("ADMIN")
-                .antMatchers(HttpMethod.DELETE, "/**")
-                .hasRole("ADMIN")
+                .antMatchers("/auth/register")
+                .permitAll()
+                .antMatchers(HttpMethod.GET, "/api/*")
+                .hasAnyAuthority("USER", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/*")
+                .hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.PATCH, "/api/*")
+                .hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/api/*")
+                .hasAuthority("ADMIN")
                 .anyRequest()
                 .authenticated()
                 .and()
