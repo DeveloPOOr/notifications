@@ -24,8 +24,10 @@
         INSERT INTO notification (type, employee_id)
         SELECT 'BIRTHDAY', id
         FROM employee e
-        WHERE (date_part('day', e.birthday::timestamp) >= date_part('day', #{startPeriod}::timestamp)) AND (date_part('month', e.birthday::timestamp) >= date_part('month', #{startPeriod}::timestamp))
-          AND (date_part('day', e.birthday::timestamp) <= date_part('day', #{endPeriod}::timestamp)) AND (date_part('month', e.birthday::timestamp) <= date_part('month', #{endPeriod}::timestamp))
+        WHERE (date_part('day', e.birthday::timestamp) >= date_part('day', #{startPeriod}::timestamp))
+          AND (date_part('month', e.birthday::timestamp) >= date_part('month', #{startPeriod}::timestamp))
+          AND (date_part('day', e.birthday::timestamp) <= date_part('day', #{endPeriod}::timestamp))
+          AND (date_part('month', e.birthday::timestamp) <= date_part('month', #{endPeriod}::timestamp))
         ON CONFLICT DO NOTHING
         ]]>;
 
@@ -35,8 +37,10 @@
         INSERT INTO notification (type, employee_id)
         SELECT 'ANNIVERSARY', id
         FROM employee e
-        WHERE (date_part('day', e.start_work::timestamp) >= date_part('day', #{startPeriod}::timestamp)) AND (date_part('month', e.start_work::timestamp) >= date_part('month', #{startPeriod}::timestamp))
-          AND (date_part('day', e.start_work::timestamp) <= date_part('day', #{endPeriod}::timestamp)) AND (date_part('month', e.start_work::timestamp) <= date_part('month', #{endPeriod}::timestamp))
+        WHERE (date_part('day', e.start_work::timestamp) >= date_part('day', #{startPeriod}::timestamp))
+          AND (date_part('month', e.start_work::timestamp) >= date_part('month', #{startPeriod}::timestamp))
+          AND (date_part('day', e.start_work::timestamp) <= date_part('day', #{endPeriod}::timestamp))
+          AND (date_part('month', e.start_work::timestamp) <= date_part('month', #{endPeriod}::timestamp))
         ON CONFLICT DO NOTHING
         ]]>;
 

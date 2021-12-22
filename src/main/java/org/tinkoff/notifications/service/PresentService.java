@@ -19,10 +19,7 @@ public class PresentService {
     public Present save(Present present, long employeeId) {
         presentDao.save(present, employeeId);
         logger.info(
-                "Present "
-                        + present
-                        + " was saved to employee's wishlist with id "
-                        + employeeId);
+                "Present " + present + " was saved to employee's wishlist with id " + employeeId);
         return present;
     }
 

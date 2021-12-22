@@ -23,7 +23,10 @@ public class AuthController {
     private final JdbcUserDetailsManager userDetailsManager;
     private final PasswordEncoder passwordEncoder;
 
-    public AuthController(EmployeeService employeeService, JdbcUserDetailsManager userDetailsManager, PasswordEncoder passwordEncoder) {
+    public AuthController(
+            EmployeeService employeeService,
+            JdbcUserDetailsManager userDetailsManager,
+            PasswordEncoder passwordEncoder) {
         this.employeeService = employeeService;
         this.userDetailsManager = userDetailsManager;
         this.passwordEncoder = passwordEncoder;
@@ -31,7 +34,11 @@ public class AuthController {
 
     @PostMapping("/register")
     public Employee register(@RequestBody @Valid UserDto userDto) {
-        userDetailsManager.createUser(new User(userDto.getUsername(), passwordEncoder.encode(userDto.getPassword()), Set.of(new SimpleGrantedAuthority("USER"))));
+        userDetailsManager.createUser(
+                new User(
+                        userDto.getUsername(),
+                        passwordEncoder.encode(userDto.getPassword()),
+                        Set.of(new SimpleGrantedAuthority("USER"))));
         Employee employee = new Employee();
         employee.setCity(userDto.getCity());
         employee.setBirthday(userDto.getBirthday());
