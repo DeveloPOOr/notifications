@@ -20,6 +20,7 @@ public class PresentService {
         presentDao.save(present, employeeId);
         logger.info(
                 "Present " + present + " was saved to employee's wishlist with id " + employeeId);
+        present.setEmployee_id(employeeId);
         return present;
     }
 
