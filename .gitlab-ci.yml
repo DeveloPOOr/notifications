@@ -11,7 +11,6 @@ variables:
   # Improve performance with overlayfs.
   DOCKER_DRIVER: overlay2
 
-
 stages:
   - test
   - build

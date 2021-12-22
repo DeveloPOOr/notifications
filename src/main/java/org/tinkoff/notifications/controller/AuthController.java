@@ -14,6 +14,7 @@ import javax.validation.Valid;
 import java.util.Set;
 
 import static org.tinkoff.notifications.constraint.ApplicationError.ACCESS_DENIED;
+import static org.tinkoff.notifications.constraint.ApplicationError.USER_ALREADY_EXIST;
 
 @RestController
 @RequestMapping("/auth")
@@ -34,6 +35,9 @@ public class AuthController {
 
     @PostMapping("/register")
     public Employee register(@RequestBody @Valid UserDto userDto) {
+        if (userDetailsManager.userExists(userDto.getUsername())) {
+            throw USER_ALREADY_EXIST.exception("with username" + userDto.getUsername());
+        }
         userDetailsManager.createUser(
                 new User(
                         userDto.getUsername(),
