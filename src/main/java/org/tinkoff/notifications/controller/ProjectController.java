@@ -1,5 +1,7 @@
 package org.tinkoff.notifications.controller;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.web.bind.annotation.*;
 import org.tinkoff.notifications.model.Employee;
 import org.tinkoff.notifications.model.Project;
@@ -8,8 +10,7 @@ import org.tinkoff.notifications.service.ProjectService;
 
 import javax.validation.Valid;
 
-import static org.tinkoff.notifications.constraint.ApplicationError.NO_EMPLOYEE;
-import static org.tinkoff.notifications.constraint.ApplicationError.NO_PROJECT;
+import static org.tinkoff.notifications.constraint.ApplicationError.*;
 
 @RestController
 @RequestMapping("/api/project")
@@ -55,18 +56,32 @@ public class ProjectController {
         projectService.delete(project);
     }
 
-    @PostMapping("/addEmployee")
-    public void addEmployee(
+    static void check(
             @RequestParam("employee_id") long employee_id,
-            @RequestParam("project_id") long project_id) {
-        Project project = projectService.findById(project_id);
-        if (project == null) {
-            throw NO_PROJECT.exception(String.format("with id %d", project_id));
-        }
+            Authentication authentication,
+            EmployeeService employeeService) {
         Employee employee = employeeService.findById(employee_id);
         if (employee == null) {
             throw NO_EMPLOYEE.exception(String.format("with id %d", employee_id));
         }
+        if (!authentication.getName().equals(employee.getUsername())
+                && !authentication
+                        .getAuthorities()
+                        .contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
+            throw ACCESS_DENIED.exception("");
+        }
+    }
+
+    @PostMapping("/addEmployee")
+    public void addEmployee(
+            @RequestParam("employee_id") long employee_id,
+            @RequestParam("project_id") long project_id,
+            Authentication authentication) {
+        Project project = projectService.findById(project_id);
+        if (project == null) {
+            throw NO_PROJECT.exception(String.format("with id %d", project_id));
+        }
+        check(employee_id, authentication, employeeService);
         projectService.addEmployee(employee_id, project_id);
     }
 }

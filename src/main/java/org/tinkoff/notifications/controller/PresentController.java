@@ -10,7 +10,8 @@ import org.tinkoff.notifications.service.PresentService;
 
 import javax.validation.Valid;
 
-import static org.tinkoff.notifications.constraint.ApplicationError.*;
+import static org.tinkoff.notifications.constraint.ApplicationError.ACCESS_DENIED;
+import static org.tinkoff.notifications.constraint.ApplicationError.NO_PRESENT;
 
 @RestController
 @RequestMapping("/api/present")
@@ -29,16 +30,7 @@ public class PresentController {
             @RequestBody @Valid Present present,
             @RequestParam("employee_id") long employee_id,
             Authentication authentication) {
-        Employee employee = employeeService.findById(employee_id);
-        if (employee == null) {
-            throw NO_EMPLOYEE.exception(String.format("with id %d", employee_id));
-        }
-        if (!authentication.getName().equals(employee.getUsername())
-                && !authentication
-                        .getAuthorities()
-                        .contains(new SimpleGrantedAuthority("ROLE_ADMIN"))) {
-            throw ACCESS_DENIED.exception("");
-        }
+        ProjectController.check(employee_id, authentication, employeeService);
         return presentService.save(present, employee_id);
     }
 

@@ -36,7 +36,7 @@ public class AuthController {
     @PostMapping("/register")
     public Employee register(@RequestBody @Valid UserDto userDto) {
         if (userDetailsManager.userExists(userDto.getUsername())) {
-            throw USER_ALREADY_EXIST.exception("with username" + userDto.getUsername());
+            throw USER_ALREADY_EXIST.exception("with username " + userDto.getUsername());
         }
         userDetailsManager.createUser(
                 new User(
