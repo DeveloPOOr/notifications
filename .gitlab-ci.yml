@@ -1,5 +1,16 @@
+services:
+  - name: docker:dind
+    # explicitly disable tls to avoid docker startup interruption
+    command: [ "--tls=false" ]
+
 variables:
-  DOCKER_DRIVER: overlay
+  # Instruct Testcontainers to use the daemon of DinD.
+  DOCKER_HOST: "tcp://docker:2375"
+  # Instruct Docker not to start over TLS.
+  DOCKER_TLS_CERTDIR: ""
+  # Improve performance with overlayfs.
+  DOCKER_DRIVER: overlay2
+
 
 stages:
   - test
