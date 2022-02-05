@@ -1,0 +1,73 @@
+<ISSPECS>
+    <DESCRIPTION>
+        <TITLE>Notifications</TITLE>
+        <SUBJ>Java, REST, Development</SUBJ>
+    </DESCRIPTION>
+    <DATA>
+        <ENTITY ent_id="project">
+            <PROPERTY>id</PROPERTY>
+            <PROPERTY>name</PROPERTY>
+            <PROPERTY>description</PROPERTY>
+        </ENTITY>
+        <ENTITY ent_id="employee">
+            <PROPERTY>id</PROPERTY>
+            <PROPERTY>phone</PROPERTY>
+            <PROPERTY>full_name</PROPERTY>
+            <PROPERTY>birthday</PROPERTY>
+            <PROPERTY>start_work</PROPERTY>
+            <PROPERTY>city</PROPERTY>
+        </ENTITY>
+        <ENTITY ent_id="present">
+            <PROPERTY>id</PROPERTY>
+            <PROPERTY>name</PROPERTY>
+            <PROPERTY>description</PROPERTY>
+            <PROPERTY>link</PROPERTY>
+            <PROPERTY>employee_id</PROPERTY>
+        </ENTITY>
+        <ENTITY ent_id="notification">
+            <PROPERTY>id</PROPERTY>
+            <PROPERTY>type</PROPERTY>
+            <PROPERTY>employee_id</PROPERTY>
+        </ENTITY>
+        <ENTITY ent_id="colleague_notification">
+            <PROPERTY>id</PROPERTY>
+            <PROPERTY>notification_id</PROPERTY>
+            <PROPERTY>colleague_id</PROPERTY>
+        </ENTITY>
+        <ENTITY ent_id="users">
+            <PROPERTY>username</PROPERTY>
+            <PROPERTY>password</PROPERTY>
+            <PROPERTY>enabled</PROPERTY>
+        </ENTITY>
+        <ENTITY ent_id="authorities">
+            <PROPERTY>username</PROPERTY>
+            <PROPERTY>authority</PROPERTY>
+        </ENTITY>
+    </DATA>
+    <ROLES>
+        <ROLE>
+            <TITLE>User</TITLE>
+            <RESPOSIBILITY>гостевая роль</RESPOSIBILITY>
+            <TOTALUSERS>NOT LIMITED</TOTALUSERS>
+        </ROLE>
+        <ROLE>
+            <TITLE>Admin</TITLE>
+            <RESPOSIBILITY>Роль Администратора</RESPOSIBILITY>
+            <TOTALUSERS>1</TOTALUSERS>
+        </ROLE>
+    </ROLES>
+    <TECHSPEC>
+        <DEVTOOLS>
+            <DEV>Java</DEV>
+            <DEV>Spring Boot</DEV>
+            <DEV>MyBatis</DEV>
+            <DEV>Docker</DEV>
+            <DEV>Flyway</DEV>
+            <DEV>Gitlab-ci</DEV>
+        </DEVTOOLS>
+        <DBMS>
+            <TITLE>PostgreSQL</TITLE>
+            <VERSION>14.1</VERSION>
+        </DBMS>
+    </TECHSPEC>
+</ISSPECS>
