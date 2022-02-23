@@ -24,6 +24,7 @@
             <result property="name" column="pres_name"/>
             <result property="link" column="pres_link"/>
             <result property="description" column="pres_description"/>
+            <result property="employee_id" column="e_id"/>
         </collection>
     </resultMap>
     <insert id="save" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
